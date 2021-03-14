@@ -11,6 +11,7 @@ export class TaskService{
     getAllTasks(): Task[] {
         return this.tasks;
     }
+    
     getTaskById(id: string): Task{
         return this.tasks.find(task => task.id === id);//return true
     }
