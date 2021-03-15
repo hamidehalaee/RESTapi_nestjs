@@ -1,10 +1,10 @@
-import {Controller,Get, Post, Body, Param, Delete, Patch, Query} from '@nestjs/common';
+import {Controller,Get, Post, Body, Param, Delete, Patch, Query, UsePipes, ValidationPipe} from '@nestjs/common';
 import {TaskService} from './tasks.service';
 import{Task, Taskstatus} from './tasks.model';
 import {CreateTaskDto} from './dto/createtask.dto';
 import { GetTaskFilterDton } from './dto/filtertask.dto';
 
-
+//we inject user service into UserController’s constructor and modify the methods.
 @Controller('/tasks')
 export class TasksController {
     constructor(private taskService: TaskService){}
@@ -23,7 +23,9 @@ export class TasksController {
         return this.taskService.getTaskById(id);
     }
     
+    //declare nestjs pipes validator
     @Post()
+    @UsePipes(ValidationPipe)
     createTask(@Body() createTaskDto: CreateTaskDto): 
     Task { //body = req.body =>@Body = req.body
         return this.taskService.createTask(createTaskDto);
