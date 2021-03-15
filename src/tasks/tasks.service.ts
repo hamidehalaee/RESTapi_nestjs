@@ -5,7 +5,12 @@ import * as uuid from 'uuid';
 import { CreateTaskDto } from './dto/createtask.dto';
 import { GetTaskFilterDton } from './dto/filtertask.dto';
 
-@Injectable()
+@Injectable() 
+//@Injectable() marks a class as a provider
+//the main idea of a provider is that
+// it can inject dependencies, this means
+// that objects can create various relationships with each
+// other and these instances be delegated to Nest runtime.
 export class TaskService{
     private tasks: Task[] = [];
 
