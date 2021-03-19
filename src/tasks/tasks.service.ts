@@ -38,14 +38,21 @@ export class TaskService{
     getTaskById(id: string): Task{
         const found =  this.tasks.find(task => task.id === id);//return true
 
+        //err Handeling getting a non-existing task
         if(!found){
             throw new NotFoundException(`task Id ${id} Not Found!`);
         }
+        //err Handeling getting a non-existing task
 
         return found;
     }
     deleteTaskById(id: string): void{
-        this.tasks = this.tasks.filter(task => task.id !== id);//return false
+
+        //err Handeling deleting a non-existing task
+        const found = this.getTaskById(id);
+        //err Handeling deleting a non-existing task
+
+        this.tasks = this.tasks.filter(task => task.id !== found.id);//return false
     }
     createTask(createTaskDto: CreateTaskDto): Task{
         const {title , description} = createTaskDto;
